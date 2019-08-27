@@ -1,8 +1,18 @@
 .bg-img {
-    background: url("../../assets/radiogirl.jpg") no-repeat center fixed;
+    background: url("../../assets/phone.jpg") no-repeat center fixed;
     background-size: cover;
     max-height: 100%;
     width: auto;
+
+    .text-config {
+        font-size: 45px;
+        font-weight: bold;
+    }
+
+    .img-text-small {
+        font-size: 20px;
+        font-weight: normal;
+    }
 }
 
 .jumbotron {
@@ -14,4 +24,8 @@
     .jumbotron-txt {
         color: black;
     }
+}
+
+.bg-color {
+    background-color: #4B515D
 }
