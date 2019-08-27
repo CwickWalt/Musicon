@@ -1,0 +1,17 @@
+.bg-img {
+    background: url("../../assets/radiogirl.jpg") no-repeat center fixed;
+    background-size: cover;
+    max-height: 100%;
+    width: auto;
+}
+
+.jumbotron {
+    /* IE8 and below */
+    background: rgb(198,218,217);
+    /* all other browsers */
+    background: rgba(198,218,217, 0.25);
+
+    .jumbotron-txt {
+        color: black;
+    }
+}

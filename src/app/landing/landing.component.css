@@ -1,0 +1,11 @@
+.bg-img {
+  background: url("../../assets/radiogirl.jpg") no-repeat center fixed;
+  background-size: cover;
+  max-height: 100%;
+  width: auto;
+}
+
+.jumbotron {
+  background: none;
+}
+/*# sourceMappingURL=landing.component.css.map */
