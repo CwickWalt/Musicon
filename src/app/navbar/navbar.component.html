@@ -1,13 +1,21 @@
-<nav class="navbar navbar-expand-md navbar-dark navbar-bg-color">
-  <a class="navbar-brand" routerLink = ''>Musicon</a>
+<nav class="navbar sticky-top navbar-expand-md navbar-dark navbar-bg-color">
+  <span class="navbar-brand mb-0 mr-4 h1">Musicon</span>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" routerLink = 'home'>Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="playlists">Playlists</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
+  <div class="collapse navbar-collapse row" id="navbarNavAltMarkup">
+    <div class="navbar-nav col-10">
+      <a class="nav-item nav-link active" routerLink = ''>Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" routerLink="playlists">Playlists</a>
+      <a class="nav-item nav-link" routerLink="#">TBD</a>
+    </div>
+    <div class="navbar-nav col">
+      <a routerLink="login" class="nav-item nav-link mr-3">
+        Log In
+      </a>
+      <a routerLink="signup" class="nav-item nav-link btn btn-light btn-sm font-weight-bold text-dark">
+        Sign Up
+      </a>
     </div>
   </div>
 </nav>

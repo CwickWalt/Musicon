@@ -1,0 +1,47 @@
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpBackend, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+@Injectable({
+    providedIn: 'root',
+})
+
+export class AuthService {   
+    router: Router
+    uri = 'https://accounts.spotify.com/'
+    private client_id = '2aba058a682c4ebbad948c86d89b222a';
+    private client_secret = '28a24ced4e554a2f9060ffbcf9e293b3';
+
+    constructor(private http: HttpClient, private handler:HttpBackend, router: Router) { 
+        this.http = new HttpClient(handler)
+        this.router = router;
+    }
+
+    getAccount() {
+        console.log('hi')
+
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.append('Authorization', `Basic ${btoa(this.client_id)}:${btoa(this.client_secret)}`);
+        headers = headers.append('Content-Type', 'applications/json');
+
+        const redirect_uri = 'http://localhost:4200/';
+        let client_id = this.client_id
+        let stateKey = 'spotify_auth_state';
+        let state =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        localStorage.setItem(stateKey, state);
+        let scope = 'user-read-private user-read-email'
+        let url = `https://accounts.spotify.com/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=token&state=${state}`;
+
+        // url += '?response_type=token';
+        // url += '&client_id=' + encodeURIComponent(client_id);
+        // // url += '&scope=' + encodeURIComponent(scope);
+        // url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+        // url += '&state=' + encodeURIComponent(state);
+        console.log(headers)
+        this.http.get(url, {headers})
+            .subscribe((value) => {
+                console.log(value)
+            });
+    }
+
+}
