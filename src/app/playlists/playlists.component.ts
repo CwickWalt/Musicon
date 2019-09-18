@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { AuthService } from '../services/auth.service';
+
+import { PlaylistService } from '../services/playlist.service'
+import { Playlist } from '../models/playlist.model'
 
 @Component({
   selector: 'app-playlists',
@@ -8,17 +12,9 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class PlaylistsComponent implements OnInit {
 
-  slideStore = []
-  exampleSlide1 = {
-    src: '../../assets/radiogirl.jpg',
-    alt: 'girl with foot on radio',
-    title: '1'
-  }
-  exampleSlide2 = {
-    src: '../../assets/radiogirl.jpg',
-    alt: 'girl with foot on radio2',
-    title: '2'
-  }
+  constructor(private authService: AuthService, private playlistService: PlaylistService) { }
+
+  myPlaylists: Playlist[] = [];
 
   customOptions: OwlOptions = {
     loop: true,
@@ -45,10 +41,11 @@ export class PlaylistsComponent implements OnInit {
     nav: true
   }
 
-  constructor() { }
-
   ngOnInit() {
-    this.slideStore.push(this.exampleSlide1, this.exampleSlide2)
+    this.playlistService.getMyPlaylists()
+    this.playlistService.getMyPlaylistsUpdateListener()
+    .subscribe((playlists: Playlist[]) => {
+      this.myPlaylists = playlists
+    })
   }
-
 }
