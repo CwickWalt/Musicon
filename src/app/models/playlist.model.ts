@@ -1,8 +1,12 @@
 export interface Playlist {
-  name: String;
-  id: String;
-  tracks: Object;
   uri: String;
+  id: String;
+  name: String;
   collaborative: Boolean;
+  description: String;
+  tracks: Object;
   images: String;
+  owner: Object;
+  type: String;
+  followers: Object;
 }

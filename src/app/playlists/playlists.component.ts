@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AuthService } from '../services/auth.service';
+import { NgForm } from '@angular/forms';
 
 import { PlaylistService } from '../services/playlist.service'
 import { Playlist } from '../models/playlist.model'
@@ -10,11 +11,15 @@ import { Playlist } from '../models/playlist.model'
   templateUrl: './playlists.component.html',
   styleUrls: ['./playlists.component.scss']
 })
-export class PlaylistsComponent implements OnInit {
+export class PlaylistsComponent implements OnInit, OnChanges {
 
   constructor(private authService: AuthService, private playlistService: PlaylistService) { }
 
+  search;
+
   myPlaylists: Playlist[] = [];
+  playlistsSearched;
+  hasSearched = false;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -41,11 +46,28 @@ export class PlaylistsComponent implements OnInit {
     nav: true
   }
 
-  ngOnInit() {
-    this.playlistService.getMyPlaylists()
-    this.playlistService.getMyPlaylistsUpdateListener()
+  onSearch(form: NgForm) {
+    console.log(form.value.search);
+    this.playlistsSearched = this.playlistService.searchItem(form.value.search);
+    this.playlistService.getSearchedPlaylistsUpdateListener()
     .subscribe((playlists: Playlist[]) => {
-      this.myPlaylists = playlists
+      this.playlistsSearched = playlists;
+      this.hasSearched = true;
     })
+  }
+
+
+  ngOnInit() {
+    this.playlistService.getCategories();
+    this.playlistService.getPlaylistTracks();
+    this.playlistService.getmyPlaylists();
+    this.playlistService.getmyPlaylistsUpdateListener()
+    .subscribe((playlists: Playlist[]) => {
+      this.myPlaylists = playlists;
+    });
+  }
+
+  ngOnChanges() {
+    console.log(this.playlistsSearched)
   }
 }

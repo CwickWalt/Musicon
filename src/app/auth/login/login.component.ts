@@ -12,13 +12,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private playlistService: PlaylistService) { }
 
-  onSubmit() {
-    this.authService.login();
-  }
+  // onSubmit() {
+  //   this.authService.login();
+  // }
 
   ngOnInit() {
-    this.authService.getAccessToken();
-    this.playlistService.getUserId();
+    // this.authService.getAccessToken();
+    // this.playlistService.getUserId();
   }
 
 }
